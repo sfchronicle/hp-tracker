@@ -51,8 +51,46 @@ def track_san_antonio():
     wks.update_cell(2, 8, tab5)
     wks.update_cell(2, 9, tab6)
 
+def track_houston():
+    cp = feedparser.parse('https://www.houstonchronicle.com/default/collectionRss/PHD-HC-Main-Centerpiece-Tab-6-101001.php').entries[0].title
+    tab2 = feedparser.parse('https://www.houstonchronicle.com/default/collectionRss/PHD-HC-Main-Centerpiece-Tab-5-101000.php').entries[0].title
+    tab3 = feedparser.parse('https://www.houstonchronicle.com/default/collectionRss/PHD-HC-Main-Centerpiece-Tab-1-103009.php').entries[0].title
+    tab4 = feedparser.parse('https://www.houstonchronicle.com/default/collectionRss/PHD-HC-Main-Centerpiece-Tab-3-98479.php').entries[0].title
+    tab5 = feedparser.parse('https://www.houstonchronicle.com/default/collectionRss/PHD-HC-Main-Centerpiece-Tab-4-98480.php').entries[0].title
+    tab6 = feedparser.parse('https://www.houstonchronicle.com/default/collectionRss/PHD-HC-Main-Centerpiece-Tab-2-98476.php').entries[0].title
+    try:
+        breaking1 = feedparser.parse('https://www.houstonchronicle.com/default/collectionRss/Breaking-News-Tab-1-112576.php').entries[0].title
+    except:
+        breaking1 = None
+    try:
+        breaking2 = feedparser.parse('https://www.houstonchronicle.com/default/collectionRss/Breaking-News-Tab-2-112578.php').entries[0].title
+    except:
+        breaking2 = None
+
+
+    sa = gspread.service_account(filename='service_account.json')
+    sh = sa.open('HC HP log')
+
+    wks = sh.worksheet('HP Log')
+    wks.insert_row([],2)
+
+    wks.update_cell(2, 1, datetime.now(pytz.timezone('US/Central')).strftime('%-I:%M %p %Y-%m-%d'))
+    wks.update_cell(2, 2, breaking1)
+    wks.update_cell(2, 3, breaking2)
+    wks.update_cell(2, 4, cp)
+    wks.update_cell(2, 5, tab2)
+    wks.update_cell(2, 6, tab3)
+    wks.update_cell(2, 7, tab4)
+    wks.update_cell(2, 8, tab5)
+    wks.update_cell(2, 9, tab6)
+
 try:
     track_san_antonio()
+except:
+    pass
+
+try:
+    track_houston()
 except:
     pass
 
