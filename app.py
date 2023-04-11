@@ -5,7 +5,7 @@ import feedparser
 import gspread
 import pytz
 
-SERVICE_ACCOUNT = os.environ['SERVICE_ACCOUNT']
+SERVICE_ACCOUNT = os.environ.get('SERVICE_ACCOUNT')
 
 # HP items
 cp = feedparser.parse('https://www.expressnews.com/default/collectionRss/SAEN-Homepage-Centerpiece-Tab-1-NEW-111490.php').entries[0].title
