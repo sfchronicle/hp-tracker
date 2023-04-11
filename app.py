@@ -51,6 +51,14 @@ def track_san_antonio():
     wks.update_cell(2, 8, tab5)
     wks.update_cell(2, 9, tab6)
 
+    # Step 7: Check for repeating rows
+    # For each column in the spreadsheet, I want to see if there are five or more consecutive rows that have the same value. if so, I want to highlight those rows in yellow using wks.format()
+    for col in range(1, 10):
+        for row in range(2, 100):
+            if wks.cell(row, col).value == wks.cell(row + 1, col).value == wks.cell(row + 2, col).value == wks.cell(row + 3, col).value == wks.cell(row + 4, col).value:
+                wks.format(f'{row}:{row + 4}', {'backgroundColor': {'red': 1, 'green': 1, 'blue': 0}})
+
+
 try:
     track_san_antonio()
 except:
