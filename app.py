@@ -1,3 +1,4 @@
+import json
 import os
 from datetime import datetime
 
@@ -6,6 +7,10 @@ import gspread
 import pytz
 
 SERVICE_ACCOUNT = os.environ.get('SERVICE_ACCOUNT')
+
+# Take the contents of the SERVICE_ACCOUNT environment variable and write it to a JSON file
+with open('service_account.json', 'w') as f:
+    json.dump(json.loads(SERVICE_ACCOUNT), f)
 
 # HP items
 cp = feedparser.parse('https://www.expressnews.com/default/collectionRss/SAEN-Homepage-Centerpiece-Tab-1-NEW-111490.php').entries[0].title
