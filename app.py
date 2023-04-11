@@ -56,7 +56,7 @@ def track_san_antonio():
     for col in range(1, 10):
         for row in range(2, 100):
             if wks.cell(row, col).value == wks.cell(row + 1, col).value == wks.cell(row + 2, col).value == wks.cell(row + 3, col).value == wks.cell(row + 4, col).value:
-                wks.format(f'{row}:{row + 4}', {'backgroundColor': {'red': 1, 'green': 1, 'blue': 0}})
+                wks.format(f'{row}:{col}', {'backgroundColor': {'red': 1, 'green': 1, 'blue': 0}})
 
 
 try:
