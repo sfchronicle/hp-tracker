@@ -41,7 +41,7 @@ def track_san_antonio():
     wks.insert_row([],2)
 
     # Step 6: Update the cells in the row we just inserted
-    wks.update_cell(2, 1, datetime.now(pytz.timezone('US/Central')).strftime('%-I:%M %p'))
+    wks.update_cell(2, 1, datetime.now(pytz.timezone('US/Central')).strftime('%-I:%M %p %Y-%m-%d'))
     wks.update_cell(2, 2, breaking1)
     wks.update_cell(2, 3, breaking2)
     wks.update_cell(2, 4, cp)
