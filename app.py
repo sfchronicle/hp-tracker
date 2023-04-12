@@ -20,6 +20,12 @@ markets = {
         'timezone': 'US/Central',
         'spreadsheet': 'HC HP log',
         'worksheet': 'HP Log'
+    },
+    'San Francisco': {
+        'url': 'https://www.sfchronicle.com/',
+        'timezone': 'US/Pacific',
+        'spreadsheet': 'SF HP log',
+        'worksheet': 'HP Log'
     }
 }
 
