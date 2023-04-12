@@ -1,4 +1,4 @@
-![Hearst home page tracker banner](img/banner.png)
+![Hearst home page tracker banner](img/new_banner.png)
 
 Hey y'all!
 
