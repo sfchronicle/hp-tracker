@@ -26,6 +26,12 @@ markets = {
         'timezone': 'US/Pacific',
         'spreadsheet': 'SF HP log',
         'worksheet': 'HP Log'
+    },
+    'Albany': {
+        'url': 'https://www.timesunion.com/',
+        'timezone': 'US/Eastern',
+        'spreadsheet': 'TU HP log',
+        'worksheet': 'HP Log'
     }
 }
 
