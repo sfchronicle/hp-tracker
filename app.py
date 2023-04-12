@@ -1,4 +1,5 @@
 import os
+import time
 from datetime import datetime
 
 import gspread
@@ -131,6 +132,7 @@ for market, info in markets.items():
     except Exception as e:
         print(f'Error: {e}')
         pass
+    time.sleep(10)
 
 # Remove the temporary json file
 os.remove('service_account.json')
