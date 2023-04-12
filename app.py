@@ -34,6 +34,10 @@ def get_headlines(market_url):
     # Find all the divs with a class of "centerpiece-tab--main-headline"
     cp_headlines = soup.find_all('div', class_='centerpiece-tab--main-headline')
 
+    # Certain markets, like the Albany Times Union, use a different theme for their homepage. The headlines feature a different class.
+    if cp_headlines == []:
+        cp_headlines = soup.find_all('a', class_='dynamicSpotlight--item-header')
+
     cp = cp_headlines[0].text.strip()
     tab2 = cp_headlines[1].text.strip()
     tab3 = cp_headlines[2].text.strip()
@@ -51,29 +55,35 @@ def get_headlines(market_url):
 
     return breaking1, breaking2, cp, tab2, tab3, tab4, tab5, tab6
 
-def record_headlines(spreadsheet, worksheet, breaking1, breaking2, cp, tab2, tab3, tab4, tab5, tab6):
+def record_headlines(spreadsheet, worksheet, timezone, breaking1, breaking2, cp, tab2, tab3, tab4, tab5, tab6):
     # The second step is to authenticate with Google Sheets
     sa = gspread.service_account(filename='service_account.json')
     
     # The third step is to open the spreadsheet we want to write to
-    sh = sa.open('EN HP log')
+    sh = sa.open(spreadsheet)
 
     # The fourth step is to open the worksheet we want to write to
-    wks = sh.worksheet('HP Log')
+    wks = sh.worksheet(worksheet)
 
     # Step 5: Insert a row at the top of the worksheet
     wks.insert_row([],2)
 
-    # Step 6: Update the cells in the row we just inserted
-    wks.update_cell(2, 1, datetime.now(pytz.timezone('US/Central')).strftime('%-I:%M %p %Y-%m-%d'))
-    wks.update_cell(2, 2, breaking1)
-    wks.update_cell(2, 3, breaking2)
-    wks.update_cell(2, 4, cp)
-    wks.update_cell(2, 5, tab2)
-    wks.update_cell(2, 6, tab3)
-    wks.update_cell(2, 7, tab4)
-    wks.update_cell(2, 8, tab5)
-    wks.update_cell(2, 9, tab6)
+    # Create a new variable called date and store the current date in the following format: YYYY-MM-DD
+    date = datetime.now(pytz.timezone(timezone)).strftime('%Y-%m-%d')
+
+    # Create a new variable called time and store the current time in the appropriate timezone in a 12-hour format without a leading zero
+    time = datetime.now(pytz.timezone(timezone)).strftime('%-I:%M %p')
+
+    wks.update_cell(2, 1, date)
+    wks.update_cell(2, 2, time)
+    wks.update_cell(2, 3, breaking1)
+    wks.update_cell(2, 4, breaking2)
+    wks.update_cell(2, 5, cp)
+    wks.update_cell(2, 6, tab2)
+    wks.update_cell(2, 7, tab3)
+    wks.update_cell(2, 8, tab4)
+    wks.update_cell(2, 9, tab5)
+    wks.update_cell(2, 10, tab6)
 
 # Loop through the markets dictionary
 for market, info in markets.items():
@@ -85,8 +95,9 @@ for market, info in markets.items():
         # Get the spreadsheet and worksheet names
         spreadsheet = info['spreadsheet']
         worksheet = info['worksheet']
+        timezone = info['timezone']
         # Record the headlines
-        record_headlines(spreadsheet, worksheet, breaking1, breaking2, cp, tab2, tab3, tab4, tab5, tab6)
+        record_headlines(spreadsheet, worksheet, timezone, breaking1, breaking2, cp, tab2, tab3, tab4, tab5, tab6)
     except Exception as e:
         print(f'Error: {e}')
         pass
