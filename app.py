@@ -32,6 +32,18 @@ markets = {
         'timezone': 'US/Eastern',
         'spreadsheet': 'TU HP log',
         'worksheet': 'HP Log'
+    },
+    'Connecticut Insider': {
+        'url': 'https://www.ctinsider.com/',
+        'timezone': 'US/Eastern',
+        'spreadsheet': 'CT Insider HP log',
+        'worksheet': 'HP Log'
+    },
+    'Connecticut Post': {
+        'url': 'https://www.ctpost.com/',
+        'timezone': 'US/Eastern',
+        'spreadsheet': 'CT Post HP log',
+        'worksheet': 'HP Log'
     }
 }
 
