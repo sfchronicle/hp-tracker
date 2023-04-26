@@ -175,7 +175,7 @@ def record_headlines(spreadsheet, worksheet, timezone, breaking1, breaking2, cp,
     time = datetime.now(pytz.timezone(timezone)).strftime('%-I:%M %p')
 
     # Create a pandas dataframe with the headlines
-    df = pd.DataFrame({'date': date, 'time': time, 'breaking1': breaking1, 'breaking2': breaking2, 'cp': cp, 'tab2': tab2, 'tab3': tab3, 'tab4': tab4, 'tab5': tab5, 'tab6': tab6}, index=[0])
+    df = pd.DataFrame({'Date': date, 'Time': time, 'Breaking 1': breaking1, 'Breaking 2': breaking2, 'CP': cp, 'Tab 2': tab2, 'Tab 3': tab3, 'Tab 4': tab4, 'Tab 5': tab5, 'Tab 6': tab6}, index=[0])
 
     wks.update([df.columns.values.tolist()] + df.values.tolist())
 
