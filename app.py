@@ -14,42 +14,42 @@ SERVICE_ACCOUNT = os.environ.get('SERVICE_ACCOUNT')
 # We create a dictionary of the markets we want to track.
 markets = {
     'San Antonio': {
-        'url': 'https://www.expressnews.com/',
+        'url': 'https://www.expressnews.com',
         'timezone': 'US/Central',
         'spreadsheet': 'https://docs.google.com/spreadsheets/d/1F073i7iMDEU0q2B8K3nG881YDr-f1bCXzc2h24V_dOs/edit#gid=0',
         'Headline log worksheet': 'Headline log',
         'URL log worksheet': 'URL log'
     },
     'Houston': {
-        'url': 'https://www.houstonchronicle.com/',
+        'url': 'https://www.houstonchronicle.com',
         'timezone': 'US/Central',
         'spreadsheet': 'https://docs.google.com/spreadsheets/d/19IZkVDucvXYT2EyHQ-8Yu2MSrknYK3Co_HI3TAd_hBA/edit#gid=0',
         'Headline log worksheet': 'Headline log',
         'URL log worksheet': 'URL log'
     },
     'San Francisco': {
-        'url': 'https://www.sfchronicle.com/',
+        'url': 'https://www.sfchronicle.com',
         'timezone': 'US/Pacific',
         'spreadsheet': 'https://docs.google.com/spreadsheets/d/1YhvmHOeT5RQLmoef6zZhWfwLD87JIAFiGqzS_llbTu8/edit#gid=0',
         'Headline log worksheet': 'Headline log',
         'URL log worksheet': 'URL log'
     },
     'Albany': {
-        'url': 'https://www.timesunion.com/',
+        'url': 'https://www.timesunion.com',
         'timezone': 'US/Eastern',
         'spreadsheet': 'https://docs.google.com/spreadsheets/d/1NREkjXsMslgsl_8XaS-9W_3t3gU67jfmptoN9-9yt1k/edit#gid=1676782739',
         'Headline log worksheet': 'Headline log',
         'URL log worksheet': 'URL log'
     },
     'Connecticut Insider': {
-        'url': 'https://www.ctinsider.com/',
+        'url': 'https://www.ctinsider.com',
         'timezone': 'US/Eastern',
         'spreadsheet': 'https://docs.google.com/spreadsheets/d/10V626AzMp1NXaW4wOnUq_VArl79XpCdbJQkbIk9esGA/edit#gid=964675505',
         'Headline log worksheet': 'Headline log',
         'URL log worksheet': 'URL log'
     },
     'Connecticut Post': {
-        'url': 'https://www.ctpost.com/',
+        'url': 'https://www.ctpost.com',
         'timezone': 'US/Eastern',
         'spreadsheet': 'https://docs.google.com/spreadsheets/d/1wMvD70EZO27TyzFY80cOxZPdFTCSqnB4YMarwuf-1vI/edit#gid=0',
         'Headline log worksheet': 'Headline log',
