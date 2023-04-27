@@ -18,42 +18,48 @@ markets = {
         'timezone': 'US/Central',
         'spreadsheet': 'https://docs.google.com/spreadsheets/d/1F073i7iMDEU0q2B8K3nG881YDr-f1bCXzc2h24V_dOs/edit#gid=0',
         'Headline log worksheet': 'Headline log',
-        'URL log worksheet': 'URL log'
+        'URL log worksheet': 'URL log',
+        'Tab order log worksheet': 'Tab order log'
     },
     'Houston': {
         'url': 'https://www.houstonchronicle.com',
         'timezone': 'US/Central',
         'spreadsheet': 'https://docs.google.com/spreadsheets/d/19IZkVDucvXYT2EyHQ-8Yu2MSrknYK3Co_HI3TAd_hBA/edit#gid=0',
         'Headline log worksheet': 'Headline log',
-        'URL log worksheet': 'URL log'
+        'URL log worksheet': 'URL log',
+        'Tab order log worksheet': 'Tab order log'
     },
     'San Francisco': {
         'url': 'https://www.sfchronicle.com',
         'timezone': 'US/Pacific',
         'spreadsheet': 'https://docs.google.com/spreadsheets/d/1YhvmHOeT5RQLmoef6zZhWfwLD87JIAFiGqzS_llbTu8/edit#gid=0',
         'Headline log worksheet': 'Headline log',
-        'URL log worksheet': 'URL log'
+        'URL log worksheet': 'URL log',
+        'Tab order log worksheet': 'Tab order log'
     },
     'Albany': {
         'url': 'https://www.timesunion.com',
         'timezone': 'US/Eastern',
         'spreadsheet': 'https://docs.google.com/spreadsheets/d/1NREkjXsMslgsl_8XaS-9W_3t3gU67jfmptoN9-9yt1k/edit#gid=1676782739',
         'Headline log worksheet': 'Headline log',
-        'URL log worksheet': 'URL log'
+        'URL log worksheet': 'URL log',
+        'Tab order log worksheet': 'Tab order log'
     },
     'Connecticut Insider': {
         'url': 'https://www.ctinsider.com',
         'timezone': 'US/Eastern',
         'spreadsheet': 'https://docs.google.com/spreadsheets/d/10V626AzMp1NXaW4wOnUq_VArl79XpCdbJQkbIk9esGA/edit#gid=964675505',
         'Headline log worksheet': 'Headline log',
-        'URL log worksheet': 'URL log'
+        'URL log worksheet': 'URL log',
+        'Tab order log worksheet': 'Tab order log'
     },
     'Connecticut Post': {
         'url': 'https://www.ctpost.com',
         'timezone': 'US/Eastern',
         'spreadsheet': 'https://docs.google.com/spreadsheets/d/1wMvD70EZO27TyzFY80cOxZPdFTCSqnB4YMarwuf-1vI/edit#gid=0',
         'Headline log worksheet': 'Headline log',
-        'URL log worksheet': 'URL log'
+        'URL log worksheet': 'URL log',
+        'Tab order log worksheet': 'Tab order log'
     }
 }
 
@@ -170,6 +176,116 @@ def get_urls(market_url):
     # Finally, we return the URLs so that we can hand them off to the next function.
     return breaking1_url, breaking2_url, cp_url, tab2_url, tab3_url, tab4_url, tab5_url, tab6_url
 
+def get_tab_order(market_url):
+    '''
+    This function takes a market URL and returns a list of tab names in order.
+    '''
+
+    # We use the getSoup function to get a BeautifulSoup object
+    soup = getSoup(market_url)
+
+    if market_url == 'https://www.timesunion.com':
+        # Set the values of cp, tab2, tab3, tab4, tab5, tab6 to https://wcm.hearstnp.com/index.php?_wcmAction=business/collection&id=116614 each
+        cp = 'https://wcm.hearstnp.com/index.php?_wcmAction=business/collection&id=116614'
+        tab2 = 'https://wcm.hearstnp.com/index.php?_wcmAction=business/collection&id=116614'
+        tab3 = 'https://wcm.hearstnp.com/index.php?_wcmAction=business/collection&id=116614'
+        tab4 = 'https://wcm.hearstnp.com/index.php?_wcmAction=business/collection&id=116614'
+        tab5 = 'https://wcm.hearstnp.com/index.php?_wcmAction=business/collection&id=116614'
+        tab6 = 'https://wcm.hearstnp.com/index.php?_wcmAction=business/collection&id=116614'
+
+    else:
+
+        # # I want the section element with the class of 'centerpiece' that contains at least one div element in it.
+        centerpiece_section = soup.find_all('section', class_='centerpiece')
+
+        # Loop through the centerpiece_section list. If the section does not contain a div element, remove it from the list.
+        for section in centerpiece_section:
+            if not section.find('div'):
+                centerpiece_section.remove(section)
+
+        centerpiece_section = centerpiece_section[0]
+
+        # In centerpiece_section, find all div elements that has a class that contains "hdnce-collection-"
+        tabs = centerpiece_section.find_all('div', class_=lambda x: x and 'hdnce-collection-' in x)
+
+        # Loop through the tabs list
+        for tab in tabs:
+            for tab_class in tab['class']:
+                if 'dynamic_headline_list' in tab_class:
+                    tabs.remove(tab)
+
+        # Loop through the tabs list and get the class attribute of each div element.
+        tab_classes = []
+        for tab in tabs:
+            # Loop through the class attribute of each div element and get the class that contains "hdnce-collection-"
+            for tab_class in tab['class']:
+                # Use regex to store the string of digits that is at least four characters long in tab_wcm_id
+                tab_wcm_id = re.findall(r'\d{4,}', tab_class)
+                if tab_wcm_id:
+                    tab_classes.append(tab_wcm_id)
+
+        # Flatten the tab_classes list
+        tab_classes = [item for sublist in tab_classes for item in sublist]
+
+        # In a list comprehension, loop through the tab_classes list and prepend them with https://wcm.hearstnp.com/index.php?_wcmAction=business/collection&id={}
+        tab_classes = ['https://wcm.hearstnp.com/index.php?_wcmAction=business/collection&id={}'.format(tab_class) for tab_class in tab_classes]
+
+        cp, tab2, tab3, tab4, tab5, tab6 = tab_classes
+    try:
+        breaking_headline_bar = soup.find('div', class_='breakingNow--list')
+
+        # Find the divs with a class that contains "hdnce-collection-"
+        breaking_headline_bar = breaking_headline_bar.find_all('div', class_=lambda x: x and 'hdnce-collection-' in x)
+
+        breaking_classes = []
+
+        for breaking_tab in breaking_headline_bar:
+            for breaking_class in breaking_tab['class']:
+                breaking_wcm_id = re.findall(r'\d{4,}', breaking_class)
+                if breaking_wcm_id:
+                    breaking_classes.append(breaking_wcm_id)
+
+        breaking_classes = [item for sublist in breaking_classes for item in sublist]
+
+        # In a list comprehension, loop through the breaking_classes list and prepend them with https://wcm.hearstnp.com/index.php?_wcmAction=business/collection&id={}
+        breaking_classes = ['https://wcm.hearstnp.com/index.php?_wcmAction=business/collection&id={}'.format(breaking_class) for breaking_class in breaking_classes]
+
+        try:
+            breaking1 = breaking_classes[0]
+        except:
+            breaking1 = ''
+        try:
+            breaking2 = breaking_classes[1]
+        except:
+            breaking2 = ''
+    except:
+        breaking1 = ''
+        breaking2 = ''
+
+    return breaking1, breaking2, cp, tab2, tab3, tab4, tab5, tab6
+
+def record_tab_order(spreadsheet, worksheet, timezone, breaking1, breaking2, cp, tab2, tab3, tab4, tab5, tab6):
+    """
+    This function takes a spreadsheet name, worksheet name, timezone, and tabs and writes them to a Google Sheet.
+    """
+
+    # We direct the bot to the worksheet we want to write to.
+    wks = spreadsheet.worksheet(worksheet)
+
+    # We add in a new row at the top of the spreadsheet.
+    wks.insert_row([],2)
+
+    # Create a new variable called date and store the current date in the following format: YYYY-MM-DD
+    date = datetime.now(pytz.timezone(timezone)).strftime('%Y-%m-%d')
+
+    # Create a new variable called time and store the current time in the appropriate timezone in a 12-hour format without a leading zero
+    time = datetime.now(pytz.timezone(timezone)).strftime('%-I:%M %p')
+
+    # Create a pandas dataframe with the headlines
+    df = pd.DataFrame({'Date':date, 'Time':time, 'Breaking 1':breaking1, 'Breaking 2':breaking2, 'Centerpiece':cp, 'Tab 2':tab2, 'Tab 3':tab3, 'Tab 4':tab4, 'Tab 5':tab5, 'Tab 6':tab6}, index=[0])
+
+    wks.update([df.columns.values.tolist()] + df.values.tolist())
+
 def record_headlines(spreadsheet, worksheet, timezone, breaking1, breaking2, cp, tab2, tab3, tab4, tab5, tab6):
     """
     This function takes a spreadsheet name, worksheet name, timezone, and headlines and writes them to a Google Sheet.
@@ -228,10 +344,14 @@ for market, info in markets.items():
         # Get the URLs for the market
         breaking1_url, breaking2_url, cp_url, tab2_url, tab3_url, tab4_url, tab5_url, tab6_url = get_urls(market_url)
 
+        # Get the tab order for the market
+        breaking1, breaking2, cp, tab2, tab3, tab4, tab5, tab6 = get_tab_order(market_url)
+
         # Get the spreadsheet and worksheet names
         spreadsheet = sa.open_by_url(info['spreadsheet'])
         headline_ws = info['Headline log worksheet']
         url_ws = info['URL log worksheet']
+        tab_order_ws = info['Tab order log worksheet']
 
         # Get the timezone
         timezone = info['timezone']
@@ -241,6 +361,9 @@ for market, info in markets.items():
 
         # Record the URLs
         record_urls(spreadsheet, url_ws, timezone, breaking1_url, breaking2_url, cp_url, tab2_url, tab3_url, tab4_url, tab5_url, tab6_url)
+
+        # Record the tab order
+        record_tab_order(spreadsheet, tab_order_ws, timezone, breaking1, breaking2, cp, tab2, tab3, tab4, tab5, tab6)
 
     except Exception as e:
         print(f'Error: {e}')
