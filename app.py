@@ -64,6 +64,11 @@ with open('service_account.json', 'w') as f:
 # We authenticate with Google using the service account json we created earlier.
 sa = gspread.service_account(filename='service_account.json')
 
+def remove_duplicate_prefix(url, prefix):
+    if url.startswith(prefix * 2):
+        url = url.replace(prefix, "", 1)
+    return url
+
 def getSoup(url):
     """
     This function takes a URL and returns a BeautifulSoup object.
@@ -143,6 +148,14 @@ def get_urls(market_url):
         tab4_url = f'{market_url}{cp_headlines[3].find("a")["href"]}'
         tab5_url = f'{market_url}{cp_headlines[4].find("a")["href"]}'
         tab6_url = f'{market_url}{cp_headlines[5].find("a")["href"]}'
+
+    # Use remove_duplicate_prefix to remove the duplicate prefix from the URLs for each.
+    cp_url = remove_duplicate_prefix(cp_url, market_url)
+    tab2_url = remove_duplicate_prefix(tab2_url, market_url)
+    tab3_url = remove_duplicate_prefix(tab3_url, market_url)
+    tab4_url = remove_duplicate_prefix(tab4_url, market_url)
+    tab5_url = remove_duplicate_prefix(tab5_url, market_url)
+    tab6_url = remove_duplicate_prefix(tab6_url, market_url)
 
     # We extract the URLs from the breaking news headlines and strip the whitespace. There isn't always a breaking news bar, so we use a try/except block to handle the error.
     try:
