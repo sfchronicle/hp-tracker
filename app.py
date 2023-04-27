@@ -346,7 +346,7 @@ for market, info in markets.items():
         breaking1_url, breaking2_url, cp_url, tab2_url, tab3_url, tab4_url, tab5_url, tab6_url = get_urls(market_url)
 
         # Get the tab order for the market
-        breaking1, breaking2, cp, tab2, tab3, tab4, tab5, tab6 = get_tab_order(market_url)
+        breaking1_order, breaking2_order, cp_order, tab2_order, tab3_order, tab4_order, tab5_order, tab6_order = get_tab_order(market_url)
 
         # Get the spreadsheet and worksheet names
         spreadsheet = sa.open_by_url(info['spreadsheet'])
@@ -364,7 +364,7 @@ for market, info in markets.items():
         record_urls(spreadsheet, url_ws, timezone, breaking1_url, breaking2_url, cp_url, tab2_url, tab3_url, tab4_url, tab5_url, tab6_url)
 
         # Record the tab order
-        record_tab_order(spreadsheet, tab_order_ws, timezone, breaking1, breaking2, cp, tab2, tab3, tab4, tab5, tab6)
+        record_tab_order(spreadsheet, tab_order_ws, timezone, breaking1_order, breaking2_order, cp_order, tab2_order, tab3_order, tab4_order, tab5_order, tab6_order)
 
     except Exception as e:
         print(f'Error: {e}')
