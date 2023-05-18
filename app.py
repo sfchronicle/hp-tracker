@@ -224,6 +224,19 @@ def get_urls(market_url):
     except:
         just_in_url = None
 
+    # In a try/except block, we extract the URLs from the top headlines and strip the whitespace. There isn't always a top headlines section, so we use a try/except block to handle the error.
+    try:
+        # Find the ul with a class of coreHeadlineList--items
+        ul = soup.find("ul", class_="coreHeadlineList--items")
+
+        headline_list = ul.find_all("div", class_="coreHeadlineList--item-headline")
+
+        top1_url = headline_list[0].find("a")["href"]
+        top2_url = headline_list[1].find("a")["href"]
+        top3_url = headline_list[2].find("a")["href"]
+        top4_url = headline_list[3].find("a")["href"]
+        top5_url = headline_list[4].find("a")["href"]
+
     # Finally, we return the URLs so that we can hand them off to the next function.
     return (
         just_in_url,
@@ -235,6 +248,11 @@ def get_urls(market_url):
         tab4_url,
         tab5_url,
         tab6_url,
+        top1_url,
+        top2_url,
+        top3_url,
+        top4_url,
+        top5_url,
     )
 
 
@@ -480,6 +498,11 @@ def record_urls(
     tab5_url,
     tab6_url,
     just_in_url,
+    top1_url,
+    top2_url,
+    top3_url,
+    top4_url,
+    top5_url,
 ):
     """
     This function takes a spreadsheet name, worksheet name, timezone, and URLs and writes them to a Google Sheet.
@@ -554,6 +577,11 @@ for market, info in markets.items():
             tab4_url,
             tab5_url,
             tab6_url,
+            top1_url,
+            top2_url,
+            top3_url,
+            top4_url,
+            top5_url,
         ) = get_urls(market_url)
 
         # Get the tab order for the market
@@ -613,6 +641,11 @@ for market, info in markets.items():
             tab5_url,
             tab6_url,
             just_in_url,
+            top1_url,
+            top2_url,
+            top3_url,
+            top4_url,
+            top5_url,
         )
 
         # Record the tab order
