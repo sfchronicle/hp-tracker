@@ -236,6 +236,13 @@ def get_urls(market_url):
         top3_url = headline_list[2].find("a")["href"]
         top4_url = headline_list[3].find("a")["href"]
         top5_url = headline_list[4].find("a")["href"]
+    except:
+        # It's probably Albany, which has a different template for the top headlines. In this case, just leave each variable blank.
+        top1_url = ""
+        top2_url = ""
+        top3_url = ""
+        top4_url = ""
+        top5_url = ""
 
     # Finally, we return the URLs so that we can hand them off to the next function.
     return (
