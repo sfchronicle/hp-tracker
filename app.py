@@ -231,11 +231,18 @@ def get_urls(market_url):
 
         headline_list = ul.find_all("div", class_="coreHeadlineList--item-headline")
 
-        top1_url = headline_list[0].find("a")["href"]
-        top2_url = headline_list[1].find("a")["href"]
-        top3_url = headline_list[2].find("a")["href"]
-        top4_url = headline_list[3].find("a")["href"]
-        top5_url = headline_list[4].find("a")["href"]
+        top1_url = f'{market_url}{headline_list[0].find("a")["href"]}'
+        top2_url = f'{market_url}{headline_list[1].find("a")["href"]}'
+        top3_url = f'{market_url}{headline_list[2].find("a")["href"]}'
+        top4_url = f'{market_url}{headline_list[3].find("a")["href"]}'
+        top5_url = f'{market_url}{headline_list[4].find("a")["href"]}'
+
+        # Use remove_duplicate_prefix to remove the duplicate prefix from the URLs for each.
+        top1_url = remove_duplicate_prefix(top1_url, market_url)
+        top2_url = remove_duplicate_prefix(top2_url, market_url)
+        top3_url = remove_duplicate_prefix(top3_url, market_url)
+        top4_url = remove_duplicate_prefix(top4_url, market_url)
+        top5_url = remove_duplicate_prefix(top5_url, market_url)
     except:
         # It's probably Albany, which has a different template for the top headlines. In this case, just leave each variable blank.
         top1_url = ""
