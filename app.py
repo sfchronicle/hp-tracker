@@ -541,6 +541,11 @@ def record_urls(
             "Tab 5": [tab5_url],
             "Tab 6": [tab6_url],
             "Just In": [just_in_url],
+            "Top 1": [top1_url],
+            "Top 2": [top2_url],
+            "Top 3": [top3_url],
+            "Top 4": [top4_url],
+            "Top 5": [top5_url],
         }
     )
 
