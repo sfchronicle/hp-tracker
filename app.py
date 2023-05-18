@@ -127,21 +127,30 @@ def get_headlines(market_url):
     except:
         just_in = None
 
-    top_headlines_list = soup.find("ul", class_="coreHeadlineList--items")
-
-    headline_list = top_headlines_list.find_all(
-        "div", class_="coreHeadlineList--item-headline"
-    )
-
     # I want to store each top headline into a variable like "top1", "top2", etc. for the first five headlines.
     try:
-        top1 = headline_list[0].text.strip()
-        top2 = headline_list[1].text.strip()
-        top3 = headline_list[2].text.strip()
-        top4 = headline_list[3].text.strip()
-        top5 = headline_list[4].text.strip()
+        if market_url == "https://www.timesunion.com":
+            top_headlines_list = soup.find("div", class_="thumbnail-list-wrapper")
+            # Find all the li elements
+            top_headlines_list = top_headlines_list.find_all("li")
+
+            top1 = top_headlines_list[0].text.strip()
+            top2 = top_headlines_list[1].text.strip()
+            top3 = top_headlines_list[2].text.strip()
+            top4 = top_headlines_list[3].text.strip()
+            top5 = top_headlines_list[4].text.strip()
+        else:
+            top_headlines_list = soup.find("ul", class_="coreHeadlineList--items")
+
+            headline_list = top_headlines_list.find_all(
+                "div", class_="coreHeadlineList--item-headline"
+            )
+            top1 = headline_list[0].text.strip()
+            top2 = headline_list[1].text.strip()
+            top3 = headline_list[2].text.strip()
+            top4 = headline_list[3].text.strip()
+            top5 = headline_list[4].text.strip()
     except:
-        # It's probably Albany, which has a different template for the top headlines. In this case, just leave each variable blank.
         top1 = ""
         top2 = ""
         top3 = ""
