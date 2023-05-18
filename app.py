@@ -384,7 +384,34 @@ def get_tab_order(market_url):
     except:
         just_in = ""
 
-    return just_in, breaking1, breaking2, cp, tab2, tab3, tab4, tab5, tab6
+    # Now we're going to find the single WCM collection for top headlines
+    try:
+        headline_element = soup.find(
+            "div", class_=lambda x: x and "dynamic_headline_list" in x
+        )
+
+        headline_element["class"] = list(
+            filter(lambda x: "dynamic_headline_list" in x, headline_element["class"])
+        )
+
+        wcm_id = re.findall(r"\d{4,}", headline_element["class"][0])[0]
+
+        top_headlines = f"https://wcm.hearstnp.com/index.php?_wcmAction=business/collection&id={wcm_id}"
+    except:
+        top_headlines = ""
+
+    return (
+        just_in,
+        breaking1,
+        breaking2,
+        cp,
+        tab2,
+        tab3,
+        tab4,
+        tab5,
+        tab6,
+        top_headlines,
+    )
 
 
 def record_tab_order(
@@ -400,6 +427,7 @@ def record_tab_order(
     tab5,
     tab6,
     just_in,
+    top_headlines,
 ):
     """
     This function takes a spreadsheet name, worksheet name, timezone, and tabs and writes them to a Google Sheet.
@@ -431,6 +459,11 @@ def record_tab_order(
             "Tab 5": tab5,
             "Tab 6": tab6,
             "Just In": just_in,
+            "Top 1": top_headlines,
+            "Top 2": top_headlines,
+            "Top 3": top_headlines,
+            "Top 4": top_headlines,
+            "Top 5": top_headlines,
         },
         index=[0],
     )
@@ -614,6 +647,7 @@ for market, info in markets.items():
             tab4_order,
             tab5_order,
             tab6_order,
+            top_headlines_order,
         ) = get_tab_order(market_url)
 
         # Get the spreadsheet and worksheet names
@@ -681,6 +715,7 @@ for market, info in markets.items():
             tab5_order,
             tab6_order,
             just_in_order,
+            top_headlines_order,
         )
 
     except Exception as e:
