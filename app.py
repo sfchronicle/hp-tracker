@@ -330,6 +330,7 @@ def record_tab_order(
     tab4,
     tab5,
     tab6,
+    just_in,
 ):
     """
     This function takes a spreadsheet name, worksheet name, timezone, and tabs and writes them to a Google Sheet.
@@ -360,6 +361,7 @@ def record_tab_order(
             "Tab 4": tab4,
             "Tab 5": tab5,
             "Tab 6": tab6,
+            "Just In": just_in,
         },
         index=[0],
     )
@@ -379,6 +381,7 @@ def record_headlines(
     tab4,
     tab5,
     tab6,
+    just_in,
 ):
     """
     This function takes a spreadsheet name, worksheet name, timezone, and headlines and writes them to a Google Sheet.
@@ -409,6 +412,7 @@ def record_headlines(
             "Tab 4": tab4,
             "Tab 5": tab5,
             "Tab 6": tab6,
+            "Just In": just_in,
         },
         index=[0],
     )
@@ -428,6 +432,7 @@ def record_urls(
     tab4_url,
     tab5_url,
     tab6_url,
+    just_in_url,
 ):
     """
     This function takes a spreadsheet name, worksheet name, timezone, and URLs and writes them to a Google Sheet.
@@ -458,6 +463,7 @@ def record_urls(
             "Tab 4": [tab4_url],
             "Tab 5": [tab5_url],
             "Tab 6": [tab6_url],
+            "Just In": [just_in_url],
         }
     )
 
@@ -492,7 +498,7 @@ for market, info in markets.items():
 
         # Get the tab order for the market
         (
-            just_in,
+            just_in_order,
             breaking1_order,
             breaking2_order,
             cp_order,
@@ -525,6 +531,7 @@ for market, info in markets.items():
             tab4,
             tab5,
             tab6,
+            just_in,
         )
 
         # Record the URLs
@@ -540,6 +547,7 @@ for market, info in markets.items():
             tab4_url,
             tab5_url,
             tab6_url,
+            just_in_url,
         )
 
         # Record the tab order
@@ -555,6 +563,7 @@ for market, info in markets.items():
             tab4_order,
             tab5_order,
             tab6_order,
+            just_in_order,
         )
 
     except Exception as e:
