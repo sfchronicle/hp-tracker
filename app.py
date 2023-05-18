@@ -303,7 +303,8 @@ def get_tab_order(market_url):
 
     # Do the same thing for the just in section. It's not always there, so we have to use a try/except block.
     try:
-        just_in = soup.find("div", class_=lambda x: x and "dynamic_breaking_now" in x)
+        main = soup.find("main")
+        just_in = main.find("div", class_=lambda x: x and "dynamic_breaking_now" in x)
         # The only class I wanted stored in the just_in variable is the one that contains "dynamic_breaking_now"
         just_in["class"] = list(
             filter(lambda x: "dynamic_breaking_now" in x, just_in["class"])
