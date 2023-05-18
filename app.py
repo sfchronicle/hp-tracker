@@ -133,10 +133,20 @@ def get_headlines(market_url):
         "div", class_="coreHeadlineList--item-headline"
     )
 
-    # I want to store each top headline into a variable like "top1", "top2", etc. I'm going to use a for loop to do this.
-    for i, headline in enumerate(headline_list[:5]):
-        # We use the f-string to create a variable name that will change each time the loop runs.
-        exec(f"top{i+1} = headline.text.strip()")
+    # I want to store each top headline into a variable like "top1", "top2", etc. for the first five headlines.
+    try:
+        top1 = headline_list[0].text.strip()
+        top2 = headline_list[1].text.strip()
+        top3 = headline_list[2].text.strip()
+        top4 = headline_list[3].text.strip()
+        top5 = headline_list[4].text.strip()
+    except:
+        # It's probably Albany, which has a different template for the top headlines. In this case, just leave each variable blank.
+        top1 = ""
+        top2 = ""
+        top3 = ""
+        top4 = ""
+        top5 = ""
 
     # Finally, we return the headlines so that we can hand them off to the next function.
     return (
