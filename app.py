@@ -241,11 +241,18 @@ def get_urls(market_url):
             # Find all the li elements
             top_headlines_list = top_headlines_list.find_all("li")
 
-            top1_url = top_headlines_list[0].find("a")["href"]
-            top2_url = top_headlines_list[1].find("a")["href"]
-            top3_url = top_headlines_list[2].find("a")["href"]
-            top4_url = top_headlines_list[3].find("a")["href"]
-            top5_url = top_headlines_list[4].find("a")["href"]
+            top1_url = f'{market_url}{top_headlines_list[0].find("a")["href"]}'
+            top2_url = f'{market_url}{top_headlines_list[1].find("a")["href"]}'
+            top3_url = f'{market_url}{top_headlines_list[2].find("a")["href"]}'
+            top4_url = f'{market_url}{top_headlines_list[3].find("a")["href"]}'
+            top5_url = f'{market_url}{top_headlines_list[4].find("a")["href"]}'
+
+            # Use remove_duplicate_prefix to remove the duplicate prefix from the URLs for each.
+            top1_url = remove_duplicate_prefix(top1_url, market_url)
+            top2_url = remove_duplicate_prefix(top2_url, market_url)
+            top3_url = remove_duplicate_prefix(top3_url, market_url)
+            top4_url = remove_duplicate_prefix(top4_url, market_url)
+            top5_url = remove_duplicate_prefix(top5_url, market_url)
         else:
             # Find the ul with a class of coreHeadlineList--items
             ul = soup.find("ul", class_="coreHeadlineList--items")
