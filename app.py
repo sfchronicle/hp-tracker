@@ -235,23 +235,35 @@ def get_urls(market_url):
 
     # In a try/except block, we extract the URLs from the top headlines and strip the whitespace. There isn't always a top headlines section, so we use a try/except block to handle the error.
     try:
-        # Find the ul with a class of coreHeadlineList--items
-        ul = soup.find("ul", class_="coreHeadlineList--items")
+        if market_url == "https://www.timesunion.com":
+            top_headlines_list = soup.find("div", class_="thumbnail-list-wrapper")
 
-        headline_list = ul.find_all("div", class_="coreHeadlineList--item-headline")
+            # Find all the li elements
+            top_headlines_list = top_headlines_list.find_all("li")
 
-        top1_url = f'{market_url}{headline_list[0].find("a")["href"]}'
-        top2_url = f'{market_url}{headline_list[1].find("a")["href"]}'
-        top3_url = f'{market_url}{headline_list[2].find("a")["href"]}'
-        top4_url = f'{market_url}{headline_list[3].find("a")["href"]}'
-        top5_url = f'{market_url}{headline_list[4].find("a")["href"]}'
+            top1_url = top_headlines_list[0].find("a")["href"]
+            top2_url = top_headlines_list[1].find("a")["href"]
+            top3_url = top_headlines_list[2].find("a")["href"]
+            top4_url = top_headlines_list[3].find("a")["href"]
+            top5_url = top_headlines_list[4].find("a")["href"]
+        else:
+            # Find the ul with a class of coreHeadlineList--items
+            ul = soup.find("ul", class_="coreHeadlineList--items")
 
-        # Use remove_duplicate_prefix to remove the duplicate prefix from the URLs for each.
-        top1_url = remove_duplicate_prefix(top1_url, market_url)
-        top2_url = remove_duplicate_prefix(top2_url, market_url)
-        top3_url = remove_duplicate_prefix(top3_url, market_url)
-        top4_url = remove_duplicate_prefix(top4_url, market_url)
-        top5_url = remove_duplicate_prefix(top5_url, market_url)
+            headline_list = ul.find_all("div", class_="coreHeadlineList--item-headline")
+
+            top1_url = f'{market_url}{headline_list[0].find("a")["href"]}'
+            top2_url = f'{market_url}{headline_list[1].find("a")["href"]}'
+            top3_url = f'{market_url}{headline_list[2].find("a")["href"]}'
+            top4_url = f'{market_url}{headline_list[3].find("a")["href"]}'
+            top5_url = f'{market_url}{headline_list[4].find("a")["href"]}'
+
+            # Use remove_duplicate_prefix to remove the duplicate prefix from the URLs for each.
+            top1_url = remove_duplicate_prefix(top1_url, market_url)
+            top2_url = remove_duplicate_prefix(top2_url, market_url)
+            top3_url = remove_duplicate_prefix(top3_url, market_url)
+            top4_url = remove_duplicate_prefix(top4_url, market_url)
+            top5_url = remove_duplicate_prefix(top5_url, market_url)
     except:
         # It's probably Albany, which has a different template for the top headlines. In this case, just leave each variable blank.
         top1_url = ""
@@ -395,17 +407,22 @@ def get_tab_order(market_url):
 
     # Now we're going to find the single WCM collection for top headlines
     try:
-        headline_element = soup.find(
-            "div", class_=lambda x: x and "dynamic_headline_list" in x
-        )
+        if market_url == "https://www.timesunion.com":
+            top_headlines = "https://wcm.hearstnp.com/index.php?_wcmAction=business/collection&id=116613"
+        else:
+            headline_element = soup.find(
+                "div", class_=lambda x: x and "dynamic_headline_list" in x
+            )
 
-        headline_element["class"] = list(
-            filter(lambda x: "dynamic_headline_list" in x, headline_element["class"])
-        )
+            headline_element["class"] = list(
+                filter(
+                    lambda x: "dynamic_headline_list" in x, headline_element["class"]
+                )
+            )
 
-        wcm_id = re.findall(r"\d{4,}", headline_element["class"][0])[0]
+            wcm_id = re.findall(r"\d{4,}", headline_element["class"][0])[0]
 
-        top_headlines = f"https://wcm.hearstnp.com/index.php?_wcmAction=business/collection&id={wcm_id}"
+            top_headlines = f"https://wcm.hearstnp.com/index.php?_wcmAction=business/collection&id={wcm_id}"
     except:
         top_headlines = ""
 
