@@ -127,8 +127,34 @@ def get_headlines(market_url):
     except:
         just_in = None
 
+    top_headlines_list = soup.find("ul", class_="coreHeadlineList--items")
+
+    headline_list = top_headlines_list.find_all(
+        "div", class_="coreHeadlineList--item-headline"
+    )
+
+    # I want to store each top headline into a variable like "top1", "top2", etc. I'm going to use a for loop to do this.
+    for i, headline in enumerate(headline_list[:5]):
+        # We use the f-string to create a variable name that will change each time the loop runs.
+        exec(f"top{i+1} = headline.text.strip()")
+
     # Finally, we return the headlines so that we can hand them off to the next function.
-    return just_in, breaking1, breaking2, cp, tab2, tab3, tab4, tab5, tab6
+    return (
+        just_in,
+        breaking1,
+        breaking2,
+        cp,
+        tab2,
+        tab3,
+        tab4,
+        tab5,
+        tab6,
+        top1,
+        top2,
+        top3,
+        top4,
+        top5,
+    )
 
 
 # Now we're going to scrape the URLs for the headlines we just scraped.
@@ -383,6 +409,11 @@ def record_headlines(
     tab5,
     tab6,
     just_in,
+    top1,
+    top2,
+    top3,
+    top4,
+    top5,
 ):
     """
     This function takes a spreadsheet name, worksheet name, timezone, and headlines and writes them to a Google Sheet.
@@ -414,6 +445,11 @@ def record_headlines(
             "Tab 5": tab5,
             "Tab 6": tab6,
             "Just In": just_in,
+            "Top 1": top1,
+            "Top 2": top2,
+            "Top 3": top3,
+            "Top 4": top4,
+            "Top 5": top5,
         },
         index=[0],
     )
@@ -480,9 +516,22 @@ for market, info in markets.items():
         market_url = info["url"]
 
         # Get the headlines for the market
-        just_in, breaking1, breaking2, cp, tab2, tab3, tab4, tab5, tab6 = get_headlines(
-            market_url
-        )
+        (
+            just_in,
+            breaking1,
+            breaking2,
+            cp,
+            tab2,
+            tab3,
+            tab4,
+            tab5,
+            tab6,
+            top1,
+            top2,
+            top3,
+            top4,
+            top5,
+        ) = get_headlines(market_url)
 
         # Get the URLs for the market
         (
@@ -533,6 +582,11 @@ for market, info in markets.items():
             tab5,
             tab6,
             just_in,
+            top1,
+            top2,
+            top3,
+            top4,
+            top5,
         )
 
         # Record the URLs
