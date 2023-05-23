@@ -84,7 +84,7 @@ def getSoup(url):
     This function takes a URL and returns a BeautifulSoup object.
     """
     headers = {"x-px-access-token": ACCESS_TOKEN}
-    page = requests.get(url)
+    page = requests.get(url, headers=headers)
     soup = BeautifulSoup(page.content, "html.parser")
     return soup
 
