@@ -11,6 +11,7 @@ from bs4 import BeautifulSoup
 
 # We grab our service account from a Github secret
 SERVICE_ACCOUNT = os.environ.get("SERVICE_ACCOUNT")
+ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
 
 # We create a dictionary of the markets we want to track.
 markets = {
@@ -82,6 +83,7 @@ def getSoup(url):
     """
     This function takes a URL and returns a BeautifulSoup object.
     """
+    headers = {"x-px-access-token": ACCESS_TOKEN}
     page = requests.get(url)
     soup = BeautifulSoup(page.content, "html.parser")
     return soup
