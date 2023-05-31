@@ -230,16 +230,22 @@ def get_urls(market_url):
     # We extract the URLs from the breaking news headlines and strip the whitespace. There isn't always a breaking news bar, so we use a try/except block to handle the error.
     try:
         breaking1_url = f'{market_url}{breaking_headlines[0]["href"]}'
+        # Try removing "?IPID=Times-Union-HP-breaking-bar" from the URL
+        breaking1_url = breaking1_url.replace("?IPID=Times-Union-HP-breaking-bar", "")
     except:
         breaking1_url = None
     try:
         breaking2_url = f'{market_url}{breaking_headlines[1]["href"]}'
+        # Try removing "?IPID=Times-Union-HP-breaking-bar" from the URL
+        breaking2_url = breaking2_url.replace("?IPID=Times-Union-HP-breaking-bar", "")
     except:
         breaking2_url = None
     try:
         just_in_url = (
             f'{market_url}{soup.find("a", {"class": "justNow--item-headline"})["href"]}'
         )
+        # Remove "?IPID=Times-Union-HP-just-in" from the URL
+        just_in_url = just_in_url.replace("?IPID=Times-Union-HP-just-in", "")
     except:
         just_in_url = None
 
