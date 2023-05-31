@@ -202,6 +202,14 @@ def get_urls(market_url):
         tab4_url = f'{market_url}{cp_headlines[3]["href"]}'
         tab5_url = f'{market_url}{cp_headlines[4]["href"]}'
         tab6_url = f'{market_url}{cp_headlines[5]["href"]}'
+
+        # Replace "?IPID=Times-Union-HP-spotlight" with an empty string.
+        cp_url = cp_url.replace("?IPID=Times-Union-HP-spotlight", "")
+        tab2_url = tab2_url.replace("?IPID=Times-Union-HP-spotlight", "")
+        tab3_url = tab3_url.replace("?IPID=Times-Union-HP-spotlight", "")
+        tab4_url = tab4_url.replace("?IPID=Times-Union-HP-spotlight", "")
+        tab5_url = tab5_url.replace("?IPID=Times-Union-HP-spotlight", "")
+        tab6_url = tab6_url.replace("?IPID=Times-Union-HP-spotlight", "")
     else:
         # We extract the URLs from the headlines and strip the whitespace. The href is in the a tag, so we need to use a for loop to extract the URLs.
         cp_url = f'{market_url}{cp_headlines[0].find("a")["href"]}'
@@ -248,6 +256,13 @@ def get_urls(market_url):
             top3_url = f'{market_url}{top_headlines_list[2].find("a")["href"]}'
             top4_url = f'{market_url}{top_headlines_list[3].find("a")["href"]}'
             top5_url = f'{market_url}{top_headlines_list[4].find("a")["href"]}'
+
+            # Replace "?IPID=Times-Union-HP-latest-news" with an empty string.
+            top1_url = top1_url.replace("?IPID=Times-Union-HP-latest-news", "")
+            top2_url = top2_url.replace("?IPID=Times-Union-HP-latest-news", "")
+            top3_url = top3_url.replace("?IPID=Times-Union-HP-latest-news", "")
+            top4_url = top4_url.replace("?IPID=Times-Union-HP-latest-news", "")
+            top5_url = top5_url.replace("?IPID=Times-Union-HP-latest-news", "")
 
             # Use remove_duplicate_prefix to remove the duplicate prefix from the URLs for each.
             top1_url = remove_duplicate_prefix(top1_url, market_url)
