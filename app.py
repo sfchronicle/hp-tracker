@@ -1893,14 +1893,22 @@ def handle_spreadsheet_update(
     updated_tab_url_log_df = pd.concat([latest_tab_order_df, historic_tab_url_log_df])
 
     # Now we write the dataframes to the spreadsheet using the set_with_dataframe method
-    set_with_dataframe(
-        sh.worksheet("Headline log"), updated_headline_log_df, include_index=False
+    api_call_handler(
+        set_with_dataframe(
+            sh.worksheet("Headline log"), updated_headline_log_df, include_index=False
+        )
     )
 
-    set_with_dataframe(sh.worksheet("URL log"), updated_url_log_df, include_index=False)
+    api_call_handler(
+        set_with_dataframe(
+            sh.worksheet("URL log"), updated_url_log_df, include_index=False
+        )
+    )
 
-    set_with_dataframe(
-        sh.worksheet("Tab order log"), updated_tab_url_log_df, include_index=False
+    api_call_handler(
+        set_with_dataframe(
+            sh.worksheet("Tab order log"), updated_tab_url_log_df, include_index=False
+        )
     )
 
 
