@@ -113,12 +113,24 @@ def get_san_antonio_headlines():
     tab6_headline = cp_headlines[5].text.strip()
 
     # We extract the URLs from the headlines and strip the whitespace. The href is in the a tag, so we need to use a for loop to extract the URLs.
-    cp_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[0].find("a")["href"], market_url)}'
-    tab2_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[1].find("a")["href"], market_url)}'
-    tab3_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[2].find("a")["href"], market_url)}'
-    tab4_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[3].find("a")["href"], market_url)}'
-    tab5_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[4].find("a")["href"], market_url)}'
-    tab6_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[5].find("a")["href"], market_url)}'
+    cp_url = remove_duplicate_prefix(
+        market_url + cp_headlines[0].find("a")["href"], market_url
+    )
+    tab2_url = remove_duplicate_prefix(
+        market_url + cp_headlines[1].find("a")["href"], market_url
+    )
+    tab3_url = remove_duplicate_prefix(
+        market_url + cp_headlines[2].find("a")["href"], market_url
+    )
+    tab4_url = remove_duplicate_prefix(
+        market_url + cp_headlines[3].find("a")["href"], market_url
+    )
+    tab5_url = remove_duplicate_prefix(
+        market_url + cp_headlines[4].find("a")["href"], market_url
+    )
+    tab6_url = remove_duplicate_prefix(
+        market_url + cp_headlines[5].find("a")["href"], market_url
+    )
 
     # Find all the divs on the page that have a class that contains the strings "hdnce-collection-" AND "-dynamic_centerpiece_tab"
     # Example: class="hide-rss-link hdnce-e hdnce-collection-105803-dynamic_centerpiece_tab"
@@ -151,13 +163,17 @@ def get_san_antonio_headlines():
     # We extract the text from the breaking news headlines and strip the whitespace. There isn't always a breaking news bar, so we use a try/except block to handle the error.
     try:
         breaking1_headline = breaking_headlines[0].text.strip()
-        breaking1_url = f'{market_url}{breaking_headlines[0]["href"]}'
+        breaking1_url = remove_duplicate_prefix(
+            market_url + breaking_headlines[0]["href"], market_url
+        )
     except:
         breaking1_headline = None
         breaking1_url = None
     try:
         breaking2_headline = breaking_headlines[1].text.strip()
-        breaking2_url = f'{market_url}{breaking_headlines[1]["href"]}'
+        breaking2_url = remove_duplicate_prefix(
+            market_url + breaking_headlines[1]["href"], market_url
+        )
     except:
         breaking2_headline = None
         breaking2_url = None
@@ -223,19 +239,19 @@ def get_san_antonio_headlines():
     top5 = headline_list[4].text.strip()
 
     top1_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[0].find("a")["href"]}', market_url
+        market_url + headline_list[0].find("a")["href"], market_url
     )
     top2_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[1].find("a")["href"]}', market_url
+        market_url + headline_list[1].find("a")["href"], market_url
     )
     top3_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[2].find("a")["href"]}', market_url
+        market_url + headline_list[2].find("a")["href"], market_url
     )
     top4_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[3].find("a")["href"]}', market_url
+        market_url + headline_list[3].find("a")["href"], market_url
     )
     top5_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[4].find("a")["href"]}', market_url
+        market_url + headline_list[4].find("a")["href"], market_url
     )
 
     # Find the div on the page that has a class that contains the strings hdnce-collection" AND "-dynamic_headline_list"
@@ -407,12 +423,24 @@ def get_houston_headlines():
     tab6_headline = cp_headlines[5].text.strip()
 
     # We extract the URLs from the headlines and strip the whitespace. The href is in the a tag, so we need to use a for loop to extract the URLs.
-    cp_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[0].find("a")["href"], market_url)}'
-    tab2_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[1].find("a")["href"], market_url)}'
-    tab3_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[2].find("a")["href"], market_url)}'
-    tab4_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[3].find("a")["href"], market_url)}'
-    tab5_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[4].find("a")["href"], market_url)}'
-    tab6_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[5].find("a")["href"], market_url)}'
+    cp_url = remove_duplicate_prefix(
+        market_url + cp_headlines[0].find("a")["href"], market_url
+    )
+    tab2_url = remove_duplicate_prefix(
+        market_url + cp_headlines[1].find("a")["href"], market_url
+    )
+    tab3_url = remove_duplicate_prefix(
+        market_url + cp_headlines[2].find("a")["href"], market_url
+    )
+    tab4_url = remove_duplicate_prefix(
+        market_url + cp_headlines[3].find("a")["href"], market_url
+    )
+    tab5_url = remove_duplicate_prefix(
+        market_url + cp_headlines[4].find("a")["href"], market_url
+    )
+    tab6_url = remove_duplicate_prefix(
+        market_url + cp_headlines[5].find("a")["href"], market_url
+    )
 
     # Find all the divs on the page that have a class that contains the strings "hdnce-collection-" AND "-dynamic_centerpiece_tab"
     # Example: class="hide-rss-link hdnce-e hdnce-collection-105803-dynamic_centerpiece_tab"
@@ -445,13 +473,17 @@ def get_houston_headlines():
     # We extract the text from the breaking news headlines and strip the whitespace. There isn't always a breaking news bar, so we use a try/except block to handle the error.
     try:
         breaking1_headline = breaking_headlines[0].text.strip()
-        breaking1_url = f'{market_url}{breaking_headlines[0]["href"]}'
+        breaking1_url = remove_duplicate_prefix(
+            market_url + breaking_headlines[0]["href"], market_url
+        )
     except:
         breaking1_headline = None
         breaking1_url = None
     try:
         breaking2_headline = breaking_headlines[1].text.strip()
-        breaking2_url = f'{market_url}{breaking_headlines[1]["href"]}'
+        breaking2_url = remove_duplicate_prefix(
+            market_url + breaking_headlines[1]["href"], market_url
+        )
     except:
         breaking2_headline = None
         breaking2_url = None
@@ -517,19 +549,19 @@ def get_houston_headlines():
     top5 = headline_list[4].text.strip()
 
     top1_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[0].find("a")["href"]}', market_url
+        market_url + headline_list[0].find("a")["href"], market_url
     )
     top2_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[1].find("a")["href"]}', market_url
+        market_url + headline_list[1].find("a")["href"], market_url
     )
     top3_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[2].find("a")["href"]}', market_url
+        market_url + headline_list[2].find("a")["href"], market_url
     )
     top4_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[3].find("a")["href"]}', market_url
+        market_url + headline_list[3].find("a")["href"], market_url
     )
     top5_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[4].find("a")["href"]}', market_url
+        market_url + headline_list[4].find("a")["href"], market_url
     )
 
     # Find the div on the page that has a class that contains the strings hdnce-collection" AND "-dynamic_headline_list"
@@ -647,13 +679,13 @@ def get_albany_headlines():
 
     # We extract the URLs from the headlines and strip the whitespace. The href is in the a tag, so we need to use a for loop to extract the URLs.
     cp_headlines = soup.find_all("a", class_="dynamicSpotlight--item-header")
-    cp_url = f'{market_url}{cp_headlines[0]["href"]}'
-    tab2_url = f'{market_url}{cp_headlines[1]["href"]}'
-    tab3_url = f'{market_url}{cp_headlines[2]["href"]}'
-    tab4_url = f'{market_url}{cp_headlines[3]["href"]}'
-    tab5_url = f'{market_url}{cp_headlines[4]["href"]}'
-    tab6_url = f'{market_url}{cp_headlines[5]["href"]}'
-    tab7_url = f'{market_url}{cp_headlines[6]["href"]}'
+    cp_url = remove_duplicate_prefix(market_url + cp_headlines[0]["href"], market_url)
+    tab2_url = remove_duplicate_prefix(market_url + cp_headlines[1]["href"], market_url)
+    tab3_url = remove_duplicate_prefix(market_url + cp_headlines[2]["href"], market_url)
+    tab4_url = remove_duplicate_prefix(market_url + cp_headlines[3]["href"], market_url)
+    tab5_url = remove_duplicate_prefix(market_url + cp_headlines[4]["href"], market_url)
+    tab6_url = remove_duplicate_prefix(market_url + cp_headlines[5]["href"], market_url)
+    tab7_url = remove_duplicate_prefix(market_url + cp_headlines[6]["href"], market_url)
 
     # Replace "?IPID=Times-Union-HP-spotlight" with an empty string.
     cp_url = cp_url.replace("?IPID=Times-Union-HP-spotlight", "")
@@ -772,11 +804,21 @@ def get_albany_headlines():
     top4 = top_headlines_list[3].text.strip()
     top5 = top_headlines_list[4].text.strip()
 
-    top1_url = f'{market_url}{top_headlines_list[0].find("a")["href"]}'
-    top2_url = f'{market_url}{top_headlines_list[1].find("a")["href"]}'
-    top3_url = f'{market_url}{top_headlines_list[2].find("a")["href"]}'
-    top4_url = f'{market_url}{top_headlines_list[3].find("a")["href"]}'
-    top5_url = f'{market_url}{top_headlines_list[4].find("a")["href"]}'
+    top1_url = remove_duplicate_prefix(
+        market_url + top_headlines_list[0].find("a")["href"], market_url
+    )
+    top2_url = remove_duplicate_prefix(
+        market_url + top_headlines_list[1].find("a")["href"], market_url
+    )
+    top3_url = remove_duplicate_prefix(
+        market_url + top_headlines_list[2].find("a")["href"], market_url
+    )
+    top4_url = remove_duplicate_prefix(
+        market_url + top_headlines_list[3].find("a")["href"], market_url
+    )
+    top5_url = remove_duplicate_prefix(
+        market_url + top_headlines_list[4].find("a")["href"], market_url
+    )
 
     # Replace "?IPID=Times-Union-HP-latest-news" with an empty string.
     top1_url = top1_url.replace("?IPID=Times-Union-HP-latest-news", "")
@@ -784,13 +826,6 @@ def get_albany_headlines():
     top3_url = top3_url.replace("?IPID=Times-Union-HP-latest-news", "")
     top4_url = top4_url.replace("?IPID=Times-Union-HP-latest-news", "")
     top5_url = top5_url.replace("?IPID=Times-Union-HP-latest-news", "")
-
-    # Use remove_duplicate_prefix to remove the duplicate prefix from the URLs for each.
-    top1_url = remove_duplicate_prefix(top1_url, market_url)
-    top2_url = remove_duplicate_prefix(top2_url, market_url)
-    top3_url = remove_duplicate_prefix(top3_url, market_url)
-    top4_url = remove_duplicate_prefix(top4_url, market_url)
-    top5_url = remove_duplicate_prefix(top5_url, market_url)
 
     # Find the div on the page that has a class that contains the strings hdnce-collection" AND "-dynamic_headline_list"
     # Example: class="hdnce-collection-105799-dynamic_headline_list"
@@ -970,12 +1005,24 @@ def get_san_francisco_headlines():
     tab6_headline = cp_headlines[5].text.strip()
 
     # We extract the URLs from the headlines and strip the whitespace. The href is in the a tag, so we need to use a for loop to extract the URLs.
-    cp_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[0].find("a")["href"], market_url)}'
-    tab2_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[1].find("a")["href"], market_url)}'
-    tab3_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[2].find("a")["href"], market_url)}'
-    tab4_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[3].find("a")["href"], market_url)}'
-    tab5_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[4].find("a")["href"], market_url)}'
-    tab6_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[5].find("a")["href"], market_url)}'
+    cp_url = remove_duplicate_prefix(
+        market_url + cp_headlines[0].find("a")["href"], market_url
+    )
+    tab2_url = remove_duplicate_prefix(
+        market_url + cp_headlines[1].find("a")["href"], market_url
+    )
+    tab3_url = remove_duplicate_prefix(
+        market_url + cp_headlines[2].find("a")["href"], market_url
+    )
+    tab4_url = remove_duplicate_prefix(
+        market_url + cp_headlines[3].find("a")["href"], market_url
+    )
+    tab5_url = remove_duplicate_prefix(
+        market_url + cp_headlines[4].find("a")["href"], market_url
+    )
+    tab6_url = remove_duplicate_prefix(
+        market_url + cp_headlines[5].find("a")["href"], market_url
+    )
 
     # Find all the divs on the page that have a class that contains the strings "hdnce-collection-" AND "-dynamic_centerpiece_tab"
     # Example: class="hide-rss-link hdnce-e hdnce-collection-105803-dynamic_centerpiece_tab"
@@ -1008,13 +1055,17 @@ def get_san_francisco_headlines():
     # We extract the text from the breaking news headlines and strip the whitespace. There isn't always a breaking news bar, so we use a try/except block to handle the error.
     try:
         breaking1_headline = breaking_headlines[0].text.strip()
-        breaking1_url = f'{market_url}{breaking_headlines[0]["href"]}'
+        breaking1_url = remove_duplicate_prefix(
+            market_url + breaking_headlines[0]["href"], market_url
+        )
     except:
         breaking1_headline = None
         breaking1_url = None
     try:
         breaking2_headline = breaking_headlines[1].text.strip()
-        breaking2_url = f'{market_url}{breaking_headlines[1]["href"]}'
+        breaking2_url = remove_duplicate_prefix(
+            market_url + breaking_headlines[1]["href"], market_url
+        )
     except:
         breaking2_headline = None
         breaking2_url = None
@@ -1079,19 +1130,19 @@ def get_san_francisco_headlines():
     top5 = headline_list[4].text.strip()
 
     top1_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[0].find("a")["href"]}', market_url
+        market_url + headline_list[0].find("a")["href"], market_url
     )
     top2_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[1].find("a")["href"]}', market_url
+        market_url + headline_list[1].find("a")["href"], market_url
     )
     top3_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[2].find("a")["href"]}', market_url
+        market_url + headline_list[2].find("a")["href"], market_url
     )
     top4_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[3].find("a")["href"]}', market_url
+        market_url + headline_list[3].find("a")["href"], market_url
     )
     top5_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[4].find("a")["href"]}', market_url
+        market_url + headline_list[4].find("a")["href"], market_url
     )
 
     # Find the div on the page that has a class that contains the strings hdnce-collection" AND "-dynamic_headline_list"
@@ -1263,12 +1314,30 @@ def get_connnecticut_insider_headlines():
     tab6_headline = cp_headlines[5].text.strip()
 
     # We extract the URLs from the headlines and strip the whitespace. The href is in the a tag, so we need to use a for loop to extract the URLs.
-    cp_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[0].find("a")["href"].replace("?src=ctipdensecp", ""), market_url)}'
-    tab2_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[1].find("a")["href"].replace("?src=ctipdensecp", ""), market_url)}'
-    tab3_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[2].find("a")["href"].replace("?src=ctipdensecp", ""), market_url)}'
-    tab4_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[3].find("a")["href"].replace("?src=ctipdensecp", ""), market_url)}'
-    tab5_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[4].find("a")["href"].replace("?src=ctipdensecp", ""), market_url)}'
-    tab6_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[5].find("a")["href"].replace("?src=ctipdensecp", ""), market_url)}'
+    cp_url = remove_duplicate_prefix(
+        market_url + cp_headlines[0].find("a")["href"].replace("?src=ctipdensecp", ""),
+        market_url,
+    )
+    tab2_url = remove_duplicate_prefix(
+        market_url + cp_headlines[1].find("a")["href"].replace("?src=ctipdensecp", ""),
+        market_url,
+    )
+    tab3_url = remove_duplicate_prefix(
+        market_url + cp_headlines[2].find("a")["href"].replace("?src=ctipdensecp", ""),
+        market_url,
+    )
+    tab4_url = remove_duplicate_prefix(
+        market_url + cp_headlines[3].find("a")["href"].replace("?src=ctipdensecp", ""),
+        market_url,
+    )
+    tab5_url = remove_duplicate_prefix(
+        market_url + cp_headlines[4].find("a")["href"].replace("?src=ctipdensecp", ""),
+        market_url,
+    )
+    tab6_url = remove_duplicate_prefix(
+        market_url + cp_headlines[5].find("a")["href"].replace("?src=ctipdensecp", ""),
+        market_url,
+    )
 
     # Find all the divs on the page that have a class that contains the strings "hdnce-collection-" AND "-dynamic_centerpiece_tab"
     # Example: class="hide-rss-link hdnce-e hdnce-collection-105803-dynamic_centerpiece_tab"
@@ -1301,13 +1370,17 @@ def get_connnecticut_insider_headlines():
     # We extract the text from the breaking news headlines and strip the whitespace. There isn't always a breaking news bar, so we use a try/except block to handle the error.
     try:
         breaking1_headline = breaking_headlines[0].text.strip()
-        breaking1_url = f'{market_url}{breaking_headlines[0]["href"]}'
+        breaking1_url = remove_duplicate_prefix(
+            market + breaking_headlines[0]["href"], market_url
+        )
     except:
         breaking1_headline = None
         breaking1_url = None
     try:
         breaking2_headline = breaking_headlines[1].text.strip()
-        breaking2_url = f'{market_url}{breaking_headlines[1]["href"]}'
+        breaking2_url = remove_duplicate_prefix(
+            market_url + breaking_headlines[1]["href"], market_url
+        )
     except:
         breaking2_headline = None
         breaking2_url = None
@@ -1368,29 +1441,41 @@ def get_connnecticut_insider_headlines():
     # We extract the text from the trending now headlines and strip the whitespace.
     try:
         trending1_headline = trending_headlines[0].text.strip()
-        trending1_url = f'{market_url}{(trending_headlines[0]["href"].replace("?src=ctipromostrip", ""))}'
-        trending1_url = remove_duplicate_prefix(trending1_url, market_url)
+        trending1_url = remove_duplicate_prefix(
+            market_url
+            + trending_headlines[0]["href"].replace("?src=ctipromostrip", ""),
+            market_url,
+        )
     except:
         trending1_headline = None
         trending1_url = None
     try:
         trending2_headline = trending_headlines[1].text.strip()
-        trending2_url = f'{market_url}{(trending_headlines[1]["href"].replace("?src=ctipromostrip", ""))}'
-        trending2_url = remove_duplicate_prefix(trending2_url, market_url)
+        trending2_headline = remove_duplicate_prefix(
+            market_url
+            + trending_headlines[1]["href"].replace("?src=ctipromostrip", ""),
+            market_url,
+        )
     except:
         trending2_headline = None
         trending2_url = None
     try:
         trending3_headline = trending_headlines[2].text.strip()
-        trending3_url = f'{market_url}{(trending_headlines[2]["href"].replace("?src=ctipromostrip", ""))}'
-        trending3_url = remove_duplicate_prefix(trending3_url, market_url)
+        trending3_url = remove_duplicate_prefix(
+            market_url
+            + trending_headlines[2]["href"].replace("?src=ctipromostrip", ""),
+            market_url,
+        )
     except:
         trending3_headline = None
         trending3_url = None
     try:
         trending4_headline = trending_headlines[3].text.strip()
-        trending4_url = f'{market_url}{(trending_headlines[3]["href"].replace("?src=ctipromostrip", ""))}'
-        trending4_url = remove_duplicate_prefix(trending4_url, market_url)
+        trending4_url = remove_duplicate_prefix(
+            market_url
+            + trending_headlines[2]["href"].replace("?src=ctipromostrip", ""),
+            market_url,
+        )
     except:
         trending4_headline = None
         trending4_url = None
@@ -1423,23 +1508,23 @@ def get_connnecticut_insider_headlines():
     top5 = headline_list[4].text.strip()
 
     top1_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[0].find("a")["href"].replace("?src=ctipdensecp", "")}',
+        market_url + headline_list[0].find("a")["href"].replace("?src=ctipdensecp", ""),
         market_url,
     )
     top2_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[1].find("a")["href"].replace("?src=ctipdensecp", "")}',
+        market_url + headline_list[1].find("a")["href"].replace("?src=ctipdensecp", ""),
         market_url,
     )
     top3_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[2].find("a")["href"].replace("?src=ctipdensecp", "")}',
+        market_url + headline_list[2].find("a")["href"].replace("?src=ctipdensecp", ""),
         market_url,
     )
     top4_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[3].find("a")["href"].replace("?src=ctipdensecp", "")}',
+        market_url + headline_list[3].find("a")["href"].replace("?src=ctipdensecp", ""),
         market_url,
     )
     top5_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[4].find("a")["href"].replace("?src=ctipdensecp", "")}',
+        market_url + headline_list[4].find("a")["href"].replace("?src=ctipdensecp", ""),
         market_url,
     )
 
@@ -1569,12 +1654,26 @@ def get_connnecticut_post_headlines():
     tab6_headline = cp_headlines[5].text.strip()
 
     # We extract the URLs from the headlines and strip the whitespace. The href is in the a tag, so we need to use a for loop to extract the URLs.
-    cp_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[0].find("a")["href"].replace("?src=rdctpdensecp", ""), market_url)}'
-    tab2_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[1].find("a")["href"].replace("?src=rdctpdensecp", ""), market_url)}'
-    tab3_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[2].find("a")["href"].replace("?src=rdctpdensecp", ""), market_url)}'
-    tab4_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[3].find("a")["href"].replace("?src=rdctpdensecp", ""), market_url)}'
-    tab5_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[4].find("a")["href"].replace("?src=rdctpdensecp", ""), market_url)}'
-    tab6_url = f'{market_url}{remove_duplicate_prefix(cp_headlines[5].find("a")["href"].replace("?src=rdctpdensecp", ""), market_url)}'
+    cp_url = remove_duplicate_prefix(
+        market_url + cp_headlines[0].find("a")["href"].replace("?src=rdctpdensecp", ""),
+        market_url,
+    )
+    tab2_url = remove_duplicate_prefix(
+        market_url + cp_headlines[1].find("a")["href"].replace("?src=rdctpdensecp", ""),
+        market_url,
+    )
+    tab3_url = remove_duplicate_prefix(
+        market_url + cp_headlines[2].find("a")["href"].replace("?src=rdctpdensecp", ""),
+        market_url,
+    )
+    tab4_url = remove_duplicate_prefix(
+        market_url + cp_headlines[3].find("a")["href"].replace("?src=rdctpdensecp", ""),
+        market_url,
+    )
+    tab5_url = remove_duplicate_prefix(
+        market_url + cp_headlines[4].find("a")["href"].replace("?src=rdctpdensecp", ""),
+        market_url,
+    )
 
     # Find all the divs on the page that have a class that contains the strings "hdnce-collection-" AND "-dynamic_centerpiece_tab"
     # Example: class="hide-rss-link hdnce-e hdnce-collection-105803-dynamic_centerpiece_tab"
@@ -1607,13 +1706,17 @@ def get_connnecticut_post_headlines():
     # We extract the text from the breaking news headlines and strip the whitespace. There isn't always a breaking news bar, so we use a try/except block to handle the error.
     try:
         breaking1_headline = breaking_headlines[0].text.strip()
-        breaking1_url = f'{market_url}{breaking_headlines[0]["href"]}'
+        breaking1_url = remove_duplicate_prefix(
+            market_url + breaking_headlines[0]["href"], market_url
+        )
     except:
         breaking1_headline = None
         breaking1_url = None
     try:
         breaking2_headline = breaking_headlines[1].text.strip()
-        breaking2_url = f'{market_url}{breaking_headlines[1]["href"]}'
+        breaking2_url = remove_duplicate_prefix(
+            market_url + breaking_headlines[1]["href"], market_url
+        )
     except:
         breaking2_headline = None
         breaking2_url = None
@@ -1674,29 +1777,41 @@ def get_connnecticut_post_headlines():
     # We extract the text from the trending now headlines and strip the whitespace.
     try:
         trending1_headline = trending_headlines[0].text.strip()
-        trending1_url = f'{market_url}{(trending_headlines[0]["href"].replace("?src=rdctppromostrip", ""))}'
-        trending1_url = remove_duplicate_prefix(trending1_url, market_url)
+        trending1_url = remove_duplicate_prefix(
+            market_url
+            + trending_headlines[0]["href"].replace("?src=rdctppromostrip", ""),
+            market_url,
+        )
     except:
         trending1_headline = None
         trending1_url = None
     try:
         trending2_headline = trending_headlines[1].text.strip()
-        trending2_url = f'{market_url}{(trending_headlines[1]["href"].replace("?src=rdctppromostrip", ""))}'
-        trending2_url = remove_duplicate_prefix(trending2_url, market_url)
+        trending2_url = remove_duplicate_prefix(
+            market_url
+            + trending_headlines[1]["href"].replace("?src=rdctppromostrip", ""),
+            market_url,
+        )
     except:
         trending2_headline = None
         trending2_url = None
     try:
         trending3_headline = trending_headlines[2].text.strip()
-        trending3_url = f'{market_url}{(trending_headlines[2]["href"].replace("?src=rdctppromostrip", ""))}'
-        trending3_url = remove_duplicate_prefix(trending3_url, market_url)
+        trending3_url = remove_duplicate_prefix(
+            market_url
+            + trending_headlines[2]["href"].replace("?src=rdctppromostrip", ""),
+            market_url,
+        )
     except:
         trending3_headline = None
         trending3_url = None
     try:
         trending4_headline = trending_headlines[3].text.strip()
-        trending4_url = f'{market_url}{(trending_headlines[3]["href"].replace("?src=rdctppromostrip", ""))}'
-        trending4_url = remove_duplicate_prefix(trending4_url, market_url)
+        trending4_url = remove_duplicate_prefix(
+            market_url
+            + trending_headlines[3]["href"].replace("?src=rdctppromostrip", ""),
+            market_url,
+        )
     except:
         trending4_headline = None
         trending4_url = None
@@ -1729,23 +1844,28 @@ def get_connnecticut_post_headlines():
     top5 = headline_list[4].text.strip()
 
     top1_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[0].find("a")["href"].replace("?src=rdctpdensecp", "")}',
+        market_url
+        + headline_list[0].find("a")["href"].replace("?src=rdctpdensecp", ""),
         market_url,
     )
     top2_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[1].find("a")["href"].replace("?src=rdctpdensecp", "")}',
+        market_url
+        + headline_list[1].find("a")["href"].replace("?src=rdctpdensecp", ""),
         market_url,
     )
     top3_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[2].find("a")["href"].replace("?src=rdctpdensecp", "")}',
+        market_url
+        + headline_list[2].find("a")["href"].replace("?src=rdctpdensecp", ""),
         market_url,
     )
     top4_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[3].find("a")["href"].replace("?src=rdctpdensecp", "")}',
+        market_url
+        + headline_list[3].find("a")["href"].replace("?src=rdctpdensecp", ""),
         market_url,
     )
     top5_url = remove_duplicate_prefix(
-        f'{market_url}{headline_list[4].find("a")["href"].replace("?src=rdctpdensecp", "")}',
+        market_url
+        + headline_list[4].find("a")["href"].replace("?src=rdctpdensecp", ""),
         market_url,
     )
 
