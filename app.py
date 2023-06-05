@@ -1861,7 +1861,7 @@ def handle_spreadsheet_update(
     sh = gc.open_by_url(market_spreadsheet_url)
 
     # In one go, I want to store the first, second and third sheets in the spreadsheet in three separate dataframes
-    # The names of the sheets are "Headline log", "URL Log" and "Tab order log"
+    # The names of the sheets are "Headline log", "URL log" and "Tab order log"
     historic_headline_log_df, historic_url_log_df, historic_tab_url_log_df = (
         pd.DataFrame(),
         pd.DataFrame(),
@@ -1874,8 +1874,8 @@ def handle_spreadsheet_update(
         if sheet.title == "Headline log":
             # We store the sheet in the historic_headline_log_df dataframe
             historic_headline_log_df = pd.DataFrame(sheet.get_all_records())
-        # If the sheet is called "URL Log"
-        elif sheet.title == "URL Log":
+        # If the sheet is called "URL log"
+        elif sheet.title == "URL log":
             # We store the sheet in the historic_url_log_df dataframe
             historic_url_log_df = pd.DataFrame(sheet.get_all_records())
         # If the sheet is called "Tab order log"
@@ -1897,7 +1897,7 @@ def handle_spreadsheet_update(
         sh.worksheet("Headline log"), updated_headline_log_df, include_index=False
     )
 
-    set_with_dataframe(sh.worksheet("URL Log"), updated_url_log_df, include_index=False)
+    set_with_dataframe(sh.worksheet("URL log"), updated_url_log_df, include_index=False)
 
     set_with_dataframe(
         sh.worksheet("Tab order log"), updated_tab_url_log_df, include_index=False
