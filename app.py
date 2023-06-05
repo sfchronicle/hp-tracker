@@ -947,7 +947,7 @@ def get_san_francisco_headlines():
     """
     This function scrapes the San Francisco Chronicle homepage
     """
-    market_url = "https://www.sfchronicle.com/"
+    market_url = "https://www.sfchronicle.com"
     wcm_url = "https://wcm.hearstnp.com/index.php?_wcmAction=business/collection&id="
     # Get the HTML content of the page
     soup = getSoup(market_url)
