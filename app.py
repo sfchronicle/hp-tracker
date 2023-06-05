@@ -1451,7 +1451,7 @@ def get_connnecticut_insider_headlines():
         trending1_url = None
     try:
         trending2_headline = trending_headlines[1].text.strip()
-        trending2_headline = remove_duplicate_prefix(
+        trending2_url = remove_duplicate_prefix(
             market_url
             + trending_headlines[1]["href"].replace("?src=ctipromostrip", ""),
             market_url,
