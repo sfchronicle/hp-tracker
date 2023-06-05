@@ -6,6 +6,7 @@ feedparser==6.0.10
 google-auth==2.17.2
 google-auth-oauthlib==1.0.0
 gspread==5.8.0
+gspread-dataframe==3.3.0
 gspread-formatting==1.1.2
 idna==3.4
 numpy==1.24.3
