@@ -1675,6 +1675,11 @@ def get_connnecticut_post_headlines():
         market_url,
     )
 
+    tab6_url = remove_duplicate_prefix(
+        market_url + cp_headlines[5].find("a")["href"].replace("?src=rdctpdensecp", ""),
+        market_url,
+    )
+
     # Find all the divs on the page that have a class that contains the strings "hdnce-collection-" AND "-dynamic_centerpiece_tab"
     # Example: class="hide-rss-link hdnce-e hdnce-collection-105803-dynamic_centerpiece_tab"
     cp_tabs = soup.find_all(
@@ -2016,16 +2021,35 @@ def handle_spreadsheet_update(
 
     print("Setting the headline log")
     # Now we write the dataframes to the spreadsheet using the set_with_dataframe method
-    set_with_dataframe(
-        sh.worksheet("Headline log"), updated_headline_log_df, include_index=False
+    # set_with_dataframe(
+    #     sh.worksheet("Headline log"), updated_headline_log_df, include_index=False
+    # )
+
+    # print("Setting the URL log")
+    # set_with_dataframe(sh.worksheet("URL log"), updated_url_log_df, include_index=False)
+
+    # print("Setting the tab order log")
+    # set_with_dataframe(
+    #     sh.worksheet("Tab order log"), updated_tab_url_log_df, include_index=False
+    # )
+    api_call_handler(
+        set_with_dataframe(
+            sh.worksheet("Headline log"), updated_headline_log_df, include_index=False
+        )
     )
 
     print("Setting the URL log")
-    set_with_dataframe(sh.worksheet("URL log"), updated_url_log_df, include_index=False)
+    api_call_handler(
+        set_with_dataframe(
+            sh.worksheet("URL log"), updated_url_log_df, include_index=False
+        )
+    )
 
     print("Setting the tab order log")
-    set_with_dataframe(
-        sh.worksheet("Tab order log"), updated_tab_url_log_df, include_index=False
+    api_call_handler(
+        set_with_dataframe(
+            sh.worksheet("Tab order log"), updated_tab_url_log_df, include_index=False
+        )
     )
 
 
@@ -2114,7 +2138,7 @@ for market, info in markets.items():
             latest_headlines_df, latest_urls_df, latest_tab_order_df, market
         )
 
-    time.sleep(10)
+    time.sleep(30)
 
 # Remove the temporary json file. We don't anyone to see our service account credentials!
 os.remove("service_account.json")
