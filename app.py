@@ -2119,7 +2119,7 @@ for market, info in markets.items():
             latest_headlines_df, latest_urls_df, latest_tab_order_df, market
         )
 
-    time.sleep(60)
+    time.sleep(70)
 
 # Remove the temporary json file. We don't anyone to see our service account credentials!
 os.remove("service_account.json")
