@@ -92,6 +92,7 @@ def get_san_antonio_headlines():
     """
     This function scrapes the San Antonio Express-News homepage
     """
+    print("📰 Scraping San Antonio Express-News...")
 
     market_url = "https://www.expressnews.com"
     wcm_url = "https://wcm.hearstnp.com/index.php?_wcmAction=business/collection&id="
