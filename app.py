@@ -2083,16 +2083,19 @@ for market, info in markets.items():
         )
     elif market == "San Francisco":
         print("--- San Francisco Chronicle ---")
-        # We call the function that scrapes the San Francisco Chronicle homepage
-        (
-            latest_headlines_df,
-            latest_urls_df,
-            latest_tab_order_df,
-        ) = get_san_francisco_headlines()
+        try:
+            # We call the function that scrapes the San Francisco Chronicle homepage
+            (
+                latest_headlines_df,
+                latest_urls_df,
+                latest_tab_order_df,
+            ) = get_san_francisco_headlines()
 
-        handle_spreadsheet_update(
-            latest_headlines_df, latest_urls_df, latest_tab_order_df, market
-        )
+            handle_spreadsheet_update(
+                latest_headlines_df, latest_urls_df, latest_tab_order_df, market
+            )
+        except:
+            pass
 
     elif market == "Connecticut Insider":
         print("--- Connecticut Insider ---")
